@@ -1,0 +1,130 @@
+SET SERVEROUT ON;
+
+DECLARE 
+    nombre varchar(50);
+    author varchar(50):='Christian';    
+    pais COUNTRIES.COUNTRY_NAME%TYPE;
+    
+    --Constant must be initialized just in declare section, otherwise you get a runtime error 
+    empresa CONSTANT varchar(20):='Mi Farma';
+    
+BEGIN
+
+    SELECT COUNTRY_NAME INTO pais FROM COUNTRIES
+    WHERE COUNTRY_ID='AR';
+    
+    nombre:='Practicando PL-SQL';
+    DBMS_OUTPUT.PUT_LINE('This string breaks here.' || nombre);
+    DBMS_OUTPUT.PUT_LINE('Author: ' || author);
+    DBMS_OUTPUT.PUT_LINE('Pais: ' || pais);
+    DBMS_OUTPUT.PUT_LINE('Empresa: ' || empresa);
+
+END;
+
+
+
+
+-- CONDITIONAL STATEMENT
+
+
+
+SET SERVEROUT ON ;
+
+
+DECLARE
+    REGION COUNTRIES.REGION_ID%TYPE ;
+BEGIN
+    SELECT  REGION_ID INTO REGION FROM COUNTRIES
+    WHERE COUNTRY_ID='CN';
+    
+    IF REGION='2' THEN
+         DBMS_OUTPUT.PUT_LINE('Continente: America');
+    ELSE
+         DBMS_OUTPUT.PUT_LINE('Continente: Otro');
+    
+    END IF;    
+END;
+
+
+-- CONDITIONAL STATEMENT IF ELSEIF
+
+
+
+SET SERVEROUT ON ;
+
+
+DECLARE
+    REGION COUNTRIES.REGION_ID%TYPE ;
+BEGIN
+    SELECT  REGION_ID INTO REGION FROM COUNTRIES
+    WHERE COUNTRY_ID='CN';
+    
+    IF REGION='1' THEN              
+         DBMS_OUTPUT.PUT_LINE('Continente: Europa');
+    ELSIF REGION='2' THEN
+         DBMS_OUTPUT.PUT_LINE('Continente: America');
+    ELSIF REGION='3' THEN              
+        DBMS_OUTPUT.PUT_LINE('Continente: Asia');
+    ELSIF REGION='4' THEN              
+        DBMS_OUTPUT.PUT_LINE('Continente: Afria');
+    ELSE               
+        DBMS_OUTPUT.PUT_LINE('Continente: Europa');
+    END IF;    
+END;
+
+
+-- LOOP
+
+SET SERVEROUT ON
+
+DECLARE
+    NUMERO_BASE NUMBER:=0;    
+BEGIN
+
+    LOOP
+        NUMERO_BASE:=NUMERO_BASE+1;
+        DBMS_OUTPUT.PUT_LINE('NUMERO: ' || NUMERO_BASE);
+        
+        
+        EXIT WHEN NUMERO_BASE=100 ;
+        --IF NUMERO_BASE=100 THEN
+        --    EXIT;
+        --END IF;
+        --
+    END LOOP;
+END;
+
+
+
+--  WHILE LOOP
+
+SET SERVEROUT ON
+
+DECLARE
+    NUMERO_BASE NUMBER:=0;    
+BEGIN
+
+    WHILE  NUMERO_BASE<100 LOOP
+        NUMERO_BASE:=NUMERO_BASE+1;
+        DBMS_OUTPUT.PUT_LINE('NUMERO: ' || NUMERO_BASE);
+    
+    END LOOP;
+END;
+
+
+--  FOR LOOP
+
+SET SERVEROUT ON;
+DECLARE
+    NUMERO NUMBER:=0;
+BEGIN 
+    
+    
+    --  FOR NUM IN REVERSE 1 .. 10  LOOP 
+    FOR NUM IN  1 .. 10  LOOP
+         DBMS_OUTPUT.PUT_LINE('NUMERO: ' || NUM);
+    END LOOP;
+END;
+
+
+SELECT * FROM COUNTRIES;
