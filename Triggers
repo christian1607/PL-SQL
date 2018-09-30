@@ -12,6 +12,23 @@ BEGIN
 END;
 
 
+
+-- BEFORE UPDATE
+
+CREATE OR REPLACE TRIGGER BEFORE_UPDATE_COUNTRY
+BEFORE UPDATE ON COUNTRIES
+ENABLE
+
+DECLARE
+    usuario VARCHAR(50);
+BEGIN
+    SELECT user INTO usuario FROM dual;
+    
+    DBMS_OUTPUT.PUT_LINE('Se intenta actualizar un campo por el usuario'||usuario);
+    
+END;
+
+
 INSERT INTO COUNTRIES VALUES ('CL','CHILE',2);
 
 Select * from COUNTRIES;
